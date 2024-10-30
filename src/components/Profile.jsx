@@ -1,26 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import s from './Profile.module.css';
+
 
 const Profile = () => {
     return(
-        <div className='content'>
+        <div className={s.content}>
             <div>
-            <img className='content-img' src='https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png' />
+                <img className={s.img} src='https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png' />
             </div>
             <div>
                 ava + description
             </div>
             <div>
-                My post
-            <div>
-                New Post
-            </div>
-            <div>
-                post 1
-            </div>
-            <div>
-                post 1
-            </div>
+                My posts
+                <div className={s.item}> 
+                    New Post
+                </div>
+                <div className={s.item}>
+                    post 1
+                </div>
+                <div className={s.item}>
+                    post 1
+                </div>
             </div>
       </div>
     );
