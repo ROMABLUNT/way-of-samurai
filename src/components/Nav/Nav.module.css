@@ -1,0 +1,18 @@
+.nav {
+    grid-area: n;
+    background-color: burlywood;
+}
+.item {
+    margin-left: 15px;
+}
+.active {
+    color: rgb(255, 0, 0);
+    margin-left: 15px;
+}
+a {
+    text-decoration: none;
+}
+p {
+    margin: 0;
+    margin-bottom: 15px;
+}
