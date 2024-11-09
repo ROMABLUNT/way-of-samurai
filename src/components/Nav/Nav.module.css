@@ -17,3 +17,11 @@ p {
     margin: 0;
     margin-bottom: 15px;
 }
+.friends {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.friendsH3{
+    text-align: center;
+}
