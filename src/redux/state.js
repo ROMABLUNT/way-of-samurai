@@ -1,6 +1,8 @@
-import { rerenderEntireTree } from "../render";
+    let rerenderEntireTree = () => {
+        console.log('state');
+    }
 
-  let state = {
+let state = {
     profilePage: {
         posts: [
             {id:1, message: 'post1', likesCount: '4'},
@@ -8,6 +10,7 @@ import { rerenderEntireTree } from "../render";
             {id:3, message: 'post3', likesCount: '4'},
             {id:4, message: 'post4', likesCount: '4'}
         ],
+        newPostText: '1',
         dialogs: [        
             {id:1, name: 'Dimych'},
             {id:2, name: 'Andrew'},
@@ -32,16 +35,29 @@ import { rerenderEntireTree } from "../render";
     }
 
 };
-export default state;
 
-export let addPost = (postMessage) => {
+
+export const addPost = () => {
     let newPost = {
         id:5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     };
 
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
     rerenderEntireTree(state);
 }
+export const updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+} 
 
+export default state;
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
+}
+
+
+// store OOP
