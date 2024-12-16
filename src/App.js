@@ -8,23 +8,19 @@ import Settings from './components/Settings/Settings'
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 const App = (props) => {
   return (
     <Router>
     <div className="app-wrapper">
       <Header />
-      <Nav friends={props.state.sideBar.friends}/>
+      <Nav/>
       <div className='app-wrapper-content'>
            <Routes>
             <Route path="/profile" element={
-              <Profile 
-              profilePage={props.state.profilePage} 
-              addPost={props.addPost}
-              updateNewPostText = {props.updateNewPostText}
-              
-              />} />
-            <Route path="/dialogs/*" element={<Dialogs  dialogs={props.state.profilePage.dialogs} messages={props.state.messagePage.messages} />} />
+              <Profile />} />
+            <Route path="/dialogs/*" element={<DialogsContainer/>} />
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />
