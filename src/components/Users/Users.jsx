@@ -1,15 +1,14 @@
 import React from "react";
 import styles from "./users.module.css";
+import axios from "axios";
+import userPhoto from "../../assets/images/user.png";
 
 const Users = (props) => {
     if(props.users.length === 0) {
-        props.setUsers (
-            [
-                {id: 1, photoUrl: "https://meloman.ru/media/upload/photos/IMG_1470_GH72Qxr.820x350.JPG", followed: false, fullName: "Dmitry", status: "I am looking for a job now...", location: {country: "Belarus", city: "Minsk",}},
-                {id: 2, photoUrl: "https://meloman.ru/media/upload/photos/IMG_1470_GH72Qxr.820x350.JPG", followed: true, fullName: "Ivan", status: "I am looking for a job now...", location: {country: "Russia", city: "Moscow",}},
-                {id: 3, photoUrl: "https://meloman.ru/media/upload/photos/IMG_1470_GH72Qxr.820x350.JPG", followed: false, fullName: "Maksim", status: "I am looking for a job now...", location: {country: "Ukraine", city: "Minsk",}},
-            ]
-        )
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response => {
+                props.setUsers (response.data.items);
+            });
     }
 
 
@@ -18,7 +17,7 @@ const Users = (props) => {
             props.users.map( u => <div key={u.Id}>
                 <span>
                     <div>
-                        <img src={u.photoUrl} className = {styles.userPhoto} />
+                        <img src={u.photos.small != null ? u.photos.small : userPhoto} className="userPhoto" />
                     </div>
                     <div>
                         { u.followed
@@ -33,8 +32,8 @@ const Users = (props) => {
                         <div>{u.status}</div>
                     </span>
                     <span>
-                        <div>{u.location.country}</div>
-                        <div>{u.location.city}</div>
+                        <div>country</div>
+                        <div>city</div>
                     </span>
                 </span>
             </div>)
