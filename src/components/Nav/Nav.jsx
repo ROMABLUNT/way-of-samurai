@@ -16,6 +16,9 @@ const Nav = (props) => {
             <NavLink className={navData => navData.isActive ? s.active : s.item} to='/dialogs'><p>Messages</p></NavLink>
           </div>
           <div className={s.item}>
+          <NavLink className={navData => navData.isActive ? s.active : s.item} to='/users'><p>Users</p></NavLink>
+          </div>
+          <div className={s.item}>
           <NavLink className={navData => navData.isActive ? s.active : s.item} to='/news'><p>News</p></NavLink>
           </div>
           <div className={s.item}>
@@ -24,6 +27,7 @@ const Nav = (props) => {
           <div className={s.item}>
           <NavLink className={navData => navData.isActive ? s.active : s.item} to='/settings'><p>Settings</p></NavLink>
           </div>
+
           {/* <div>
             <h3 className={s.friendsH3}>Friends</h3>
             <div className={s.friends}>
