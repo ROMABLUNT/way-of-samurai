@@ -1,32 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Profile from "./Profile";
 import axios from "axios";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setUserProfile } from "../../redux/profile-reducer";
+import { useParams, useNavigate } from "react-router-dom";
 
-class ProfileContainer extends React.Component {
+const ProfileContainer = () => {
+    const profile = useSelector((state) => state.profilePage.profile);
+    const dispatch = useDispatch();
+    const { userId } = useParams();
+    const navigate = useNavigate();
 
-    componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/profile/2")
-            .then(response => {
-                this.props.setUserProfile(response.data);
+    useEffect(() => {
+        let resolvedUserId = userId || 2; // Если userId не указан, берем значение по умолчанию
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/profile/${resolvedUserId}`)
+            .then((response) => {
+                dispatch(setUserProfile(response.data));
+            })
+            .catch((error) => {
+                console.error("Failed to fetch user profile:", error);
+                // Опционально: обработка ошибок, например, редирект на страницу ошибки
+                navigate("/error");
             });
+    }, [userId, dispatch, navigate]);
 
+    return (
+        <div>
+            <Profile profile={profile} />
+        </div>
+    );
+};
 
-    }
-
-    render() {
-        return (
-            <div>
-                <Profile {...this.props} profile={this.props.profile} />
-            </div>
-        )
-    }
-}
-
-let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile,
-});
-
-export default connect(mapStateToProps, {setUserProfile}) (ProfileContainer);
-;
+export default ProfileContainer;
