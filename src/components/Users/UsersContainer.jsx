@@ -3,7 +3,6 @@ import Users from "./Users";
 import { connect } from "react-redux";
 import { setUsers, follow, unfollow, setCurrentPage, setUsersTotalCount, toggleIsFetching} from "../../redux/users-reducer";
 import axios from "axios";
-import preloader from "../../assets/Gear.svg"
 import Preloader from "../common/Preloader/Preloader";
 
 class UsersContainer extends React.Component {
