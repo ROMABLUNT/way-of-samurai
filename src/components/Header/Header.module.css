@@ -6,5 +6,10 @@
     width: 40px;
     margin-top: 8px;
     margin-left: 7px;
-
+}
+.loginBlock {
+    float: right;
+}
+.loginBlock a {
+    color: white;
 }
