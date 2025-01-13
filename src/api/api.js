@@ -1,45 +1,39 @@
 import axios from "axios"
 
-export const getUsers = (currentPage = 1, pageSize = 10) => {
-    return axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`,
-        {
-            withCredentials: true
-        }
-    )
-    .then(response => {
-        return response.data;
-    });
-}
+const  instance = axios.create({
+    withCredentials: true,
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+    headers: {
+        "API-KEY": "7bd7c172-61e1-4aff-9096-bb394cf0f0c7"
+    }
+})
 
-export const unfollowUser = (id) => {
-    return axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
-        withCredentials: true,
-        headers: {
-            "API-KEY": "7bd7c172-61e1-4aff-9096-bb394cf0f0c7"
-        }
-    })
-    .then(response => {
-        return response.data;
-    })
-}
-export const followUser = (id) => {
-    return axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
-        withCredentials: true,
-        headers: {
-            "API-KEY": "7bd7c172-61e1-4aff-9096-bb394cf0f0c7"
-        }
-    })
-    .then(response => {
-        return response.data;
-    })
-}
+export const usersAPI = {
+    getUsers(currentPage = 1, pageSize = 10) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        .then(response => {
+            return response.data;
+        });
+    
+    },
+    unfollowUser(id) {
+        return instance.delete(`follow/${id}`)
+        .then(response => {
+            return response.data;
+        })
+    },
+    followUser(id) {
+        return instance.post(`follow/${id}`)
+        .then(response => {
+            return response.data;
+        })
+    },
+    authMe() {
+        return instance.get('auth/me')
+    },
+    getProfile (resolvedUserId) {
+        return instance.get(`profile/${resolvedUserId}`)
+    },
 
-export const authMe = () => {
-    return axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
-        withCredentials: true
-    })
-}
 
-export const getProfile = (resolvedUserId) => {
-    return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${resolvedUserId}`)
 }

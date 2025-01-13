@@ -4,7 +4,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserProfile } from "../../redux/profile-reducer";
 import { useParams, useNavigate } from "react-router-dom";
-import { getProfile } from "../../api/api";
+import { usersAPI } from "../../api/api";
 
 const ProfileContainer = () => {
     const profile = useSelector((state) => state.profilePage.profile);
@@ -14,7 +14,7 @@ const ProfileContainer = () => {
 
     useEffect(() => {
         let resolvedUserId = userId || 2; // Если userId не указан, берем значение по умолчанию
-        getProfile(resolvedUserId)
+        usersAPI.getProfile(resolvedUserId)
             .then((response) => {
                 dispatch(setUserProfile(response.data));
             })
