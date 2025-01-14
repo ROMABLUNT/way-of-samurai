@@ -28,12 +28,12 @@ export const usersAPI = {
             return response.data;
         })
     },
-    authMe() {
-        return instance.get('auth/me')
-    },
     getProfile (resolvedUserId) {
         return instance.get(`profile/${resolvedUserId}`)
     },
-
-
+}
+export const authAPI = {
+    me() {
+        return instance.get('auth/me')
+    },
 }
