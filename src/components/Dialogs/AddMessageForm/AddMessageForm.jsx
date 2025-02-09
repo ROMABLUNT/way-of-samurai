@@ -12,7 +12,7 @@ const AddMessageForm = (props) => {
             <Field component={Textarea} validate={[required, maxLength50 ]} name="newMessageBody" placeholder="Enter your message" />
         </div>
         <div>
-            <button>Send</button>
+            <button></button>
         </div>
     </form>
     )
